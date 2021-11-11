@@ -16,7 +16,7 @@ class Conta:
     def __init__(self, saldo = 0, titular = []):
         self.__saldo = saldo
         self.__titular = titular
-        self.__historico = [saldo, data]
+        self.__historico = {data: [f'{saldo}']}
 
     @property
     def saldo(self):
@@ -25,28 +25,22 @@ class Conta:
     @property
     def historico(self):
         return self.__historico
-
-    @saldo.setter
-    def saldo(self, valor):
-        self.__saldo += valor
-    
-    @historico.setter
-    def historico(self, lista):
-        self.__historico.append(lista)
+      
 
     def sacar(self, valor):
-        if self.saldo >= valor:
-            self.saldo -= valor
-            self.historico.append([f'-{valor}'])
-            self.historico.append(data)
+        if self.__saldo >= valor:
+            self.__saldo -= valor
+            valorN = f'-{valor}'
+            self.adicionar_ao_historico(data, valorN)
         else:
             print('Saldo insuficiente')
 
 
     def depositar(self, valor):
         if valor > 0:
-            self.saldo += valor
-            self.historico.append([f'+{valor}', data])
+            self.__saldo += valor
+            valorN = f'+{valor}'
+            self.adicionar_ao_historico(data, valorN)
         else:
             print('Valor incorreto')
 
@@ -57,8 +51,12 @@ class Conta:
 
     def extrato(self):
         print(self.titular, self.saldo)
-        for x in self.__historico:
-            print(x)
+        for data, valor in self.__historico.items():
+            print(data)
+            print(valor)
+    
+    def adicionar_ao_historico(self, data, valor):
+        self.__historico[data] = self.__historico[data] + [valor]
 
 
 
@@ -76,31 +74,18 @@ class Poupanca(Conta):
     @property
     def historico(self):
         return super().historico
-
-
-    @saldo.setter
-    def saldo(self, valor):
-        valor = int(valor)
-        super(Poupanca, type(self)).saldo.fset(self, valor)
-    
-
-    @historico.setter
-    def historico(self, lista):
-        super(Poupanca, type(self)).historico.fset(self, lista)
-
+   
 
     def sacar(self, valor):
         if self.saldo >= valor:
-            self.saldo -= valor
-            self.historico.append([f'-{valor}', data])
+            super(Conta_Especial, type(self)).sacar(self, valor)
         else:
             print('Saldo insuficiente')
 
 
     def depositar(self, valor):
         if valor > 0:
-            self.saldo += valor
-            self.historico.append([f'+{valor}', data])
+           super(Conta_Especial, type(self)).depositar(self, valor)
         else:
             print('Valor incorreto')
 
@@ -120,31 +105,20 @@ class Conta_Especial(Conta):
     @property
     def historico(self):
         return super().historico
-
-
-    @saldo.setter
-    def saldo(self, valor):
-        valor = int(valor)
-        super(Conta_Especial, type(self)).saldo.fset(self, valor)
-    
-
-    @historico.setter
-    def historico(self, lista):
-        super(Conta_Especial, type(self)).historico.fset(self, lista)
-
+        
 
     def sacar(self, valor):
         if self.saldo+self.limite_especial >= valor:
-            self.saldo -= valor
-            self.historico.append([f'-{valor}', data])
+            super().sacar(valor)
+
         else:
             print('Saldo insuficiente')
 
 
     def depositar(self, valor):
         if valor > 0:
-            self.saldo += valor
-            self.historico.append([f'+{valor}', data])
+            super().depositar( valor)
+            
         else:
             print('Valor incorreto')
   
@@ -152,7 +126,8 @@ class Conta_Especial(Conta):
 
 
 conta1 = Conta_Especial(100)
-conta1.depositar(50)
-conta1.sacar(200) 
+conta1.depositar(150)
+conta1.sacar(250)
 conta1.extrato()
+print(conta1.saldo)
 
