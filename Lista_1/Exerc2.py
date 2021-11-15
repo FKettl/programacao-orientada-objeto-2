@@ -59,6 +59,7 @@ class Livro:
 livro1 = Livro('O clã dos magos: a Trilogia do Mago Negro', 'Trudi Canavan', 2012, 'Novo Conceito', 1, 1)
 livro2 = Livro('A aprendiz: a Trilogia do Mago Negro', 'Trudi Canavan', 2012, 'Novo Conceito', 1, 2)
 livro3 = Livro('O lorde supremo: a Trilogia do Mago Negro','Trudi Canavan', 2012, 'Novo Conceito', 1, 2)
-
+'''
 Livro.exibir_storage()
 print(Livro.storage[2].titulo, '-', Livro.storage[2].autores)
+'''
