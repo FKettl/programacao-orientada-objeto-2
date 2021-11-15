@@ -79,19 +79,19 @@ class Sistema:
             if livro.isnumeric():
                 '''Mostra o livro'''
                 Sistema.atualizar_Tela()
-                self.livroaberto == True
+                self.livroaberto = True
                 return Livro.storage[livro]
             else:
                 for x in Livro.storage:
                     if x.titulo == livro:
                         Sistema.atualizar_Tela()
-                        self.livroaberto == True
+                        self.livroaberto = True
                         '''Mostra o livro'''
                         return livro
                 print('Livro não encontrado, tente novamente')
 
     def fechar_livro(self):
-        self.livroaberto == False
+        self.livroaberto = False
         Sistema.atualizar_Tela()
         '''Fecha o livro'''
 
