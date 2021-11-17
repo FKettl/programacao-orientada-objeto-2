@@ -39,9 +39,10 @@ class Matematica:
 
     def fibonarial(numero):
         lista = Matematica.lista_fibonacci(numero)
-        total = 0
+        total = 1
         for x in lista:
-            total += x
+            if x > 0:
+                total *= x
 
         return total
         
