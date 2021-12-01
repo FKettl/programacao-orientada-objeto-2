@@ -1,3 +1,6 @@
+'''Escreva uma função que conta a frequência de ocorrência de cada
+palavra em um texto (arquivo txt) e armazena tal quantidade em um dicionário, onde a
+chave é a vogal considerada.'''
 #Eu ia utilizar regex, porém troquei regex por lógica básica pra fazer a função certinho
 
 def contar_ocorrencia(lista):

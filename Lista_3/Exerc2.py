@@ -1,3 +1,5 @@
+'''Escreva uma função que apaga do dicionário anterior, todas as palavras
+que sejam ‘stopwords ’.'''
 from Exerc1 import dicionario
 
 print(len(dicionario))   
